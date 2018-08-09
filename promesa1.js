@@ -11,7 +11,8 @@ const fsp = {
 }
 
 function getSizeOfDir (path) {
-  return fsp.readdir(path)
+  return Promise.resolve()
+    .then(() => fsp.readdir(path))
     .then(files => files.map(file => fsp.stat(file)))
     .then(statsPromises => Promise.all(statsPromises))
     .then(stats => stats.map(stat => stat.size))
